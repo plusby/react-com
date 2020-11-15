@@ -1,5 +1,5 @@
-import React from 'react'
-import classNames from 'classNames'
+import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes}  from 'react'
+import { classNames } from '../../utils'
 
 const ButtonType = {
   'Link': 'link',
@@ -20,11 +20,18 @@ interface BaseButtonProps {
   href?: string;
 }
 
-type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>;
-type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>;
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>;
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
 
-const Button: React.FC<ButtonProps> = (props) => {
+/**
+ * ##使用
+ * ~~~js
+ * import Button from 'react-ui-com'
+ * ~~~
+ * @param props 
+ */
+export const Button: FC<ButtonProps> = (props) => {
   const {
     btnType,
     disabled,
@@ -42,6 +49,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     [`btn-${size}`]: size,
     'disabled': (btnType === ButtonType.Link) && disabled
   })
+
   if(btnType === ButtonType.Link && href){
     return (
       <a
@@ -69,4 +77,4 @@ Button.defaultProps = {
   btnType: 'primary'
 }
 
-export default Button
+export default Button;
